@@ -3,17 +3,12 @@ import {useState, useEffect} from 'react'
 
 
 const Inputs = () => {
-   const [view, setView]=useState(false)
-   
-   const location = window.location.pathname
+  
     const dispatch = usePartsDispatch()
     const state =useParts()
 
-    console.log(state)
 
-  useEffect(()=>{
-    setView(state.view)
-  },[state.view])
+
 
     const handleInput =(e)=>{
         dispatch({
@@ -27,7 +22,7 @@ const Inputs = () => {
         <div>
 
             {
-                view ?
+                !state.view ?
             <div  className='container-input'> 
                  <label>Part Number</label>
                 <input className='input-part' name='number'

@@ -1,18 +1,27 @@
 import {Link, NavLink} from 'react-router-dom'
-import { usePartsDispatch } from './Context'
+import { usePartsDispatch, useParts } from './Context'
 
 
 const NavBar = ()=>{
     const dispatch = usePartsDispatch()
- 
+    const state = useParts()
+  
 
-    const handleButton = (e)=>{
-      
+    const handleButton = ()=>{
+       if(state.view == true){
+            dispatch({
+                type:'envio',
+                payload: false
+            
+            });
+       }else{
         dispatch({
             type:'envio',
-            payload: true,
+            payload: true
            
         });
+       }
+       
 
     }
 
@@ -21,7 +30,7 @@ const NavBar = ()=>{
      <nav >
         <Link className='title' to="/">ATCO</Link>
         <ul >
-            <li type='envio' name='home' onClick={(e)=>handleButton(e)}>
+            <li type='envio' onClick={handleButton}>
                 <NavLink  to="/">Home</NavLink>
             </li>
             <li type='envio' onClick={handleButton}>
