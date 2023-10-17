@@ -1,13 +1,9 @@
-import {usePartsDispatch, useParts} from './Context'
-import {useState, useEffect} from 'react'
+import {usePartsDispatch} from './Context'
 
 
 const Inputs = () => {
   
     const dispatch = usePartsDispatch()
-    const state =useParts()
-
-
 
 
     const handleInput =(e)=>{
@@ -15,24 +11,20 @@ const Inputs = () => {
             type:'textInput',
             payload:{key:e.target.name, value:e.target.value},
         });
+
+       
+
+        if(e.target.value !== ''){
+            dispatch({
+                type:'active',
+                payload:{activo:true}
+            })
+        }
     }
 
 
     return(
-        <div>
-
-            {
-                !state.view ?
-            <div  className='container-input'> 
-                 <label>Part Number</label>
-                <input className='input-part' name='number'
-                type='text'
-                onChange={handleInput}
-              /> 
-             
-            </div>
-
-             : 
+           
         <div  className='container-input'>
              <label>Material</label>
         <select className='select-part' type='text' name='material' onChange={handleInput}>
@@ -45,7 +37,7 @@ const Inputs = () => {
         <label>Tube Size</label>
         <select  className='select-part' type='text' name='tube' onChange={handleInput}>
             <option>Size</option>
-            <option value='3/16'>2</option>
+            <option value='2'>2</option>
             <option value='1/4'>1/4</option>
             <option value='5/16'>3</option>
             <option value='3/8'>4</option>
@@ -60,37 +52,32 @@ const Inputs = () => {
 
         <label>How many Bend</label>
         <input className='input-part' name='bend'
-            type='text'
-            onChange={handleInput}
-        />
-           <label>Ferrule Number</label>
+                type='text'
+                onChange={handleInput}
+                />
+        <label>Ferrule Number</label>
         <input className='input-part' name='ferrule'
-            type='text'
-            onChange={handleInput}
-        />
+                type='text'
+                onChange={handleInput}
+                />
         <label>Nut Number</label>
         <input className='input-part' name='nut'
-            type='text'
-            onChange={handleInput}
-        />
+                type='text'
+                onChange={handleInput}
+                />
         <label>Use Valve</label>
         <input name='valve'
-            type='checkbox'
-            onChange={handleInput}
-        />
+                type='checkbox'
+                onChange={handleInput}
+                />
         <label>Use Block</label>
         <input name='block'
-            type='checkbox'
-            onChange={handleInput}
-        />
+                type='checkbox'
+                onChange={handleInput}
+                />
 
 
-                </div>
-            
-            }
-               
-        
-
+        <button>Reset</button>
         </div>
     )
 }

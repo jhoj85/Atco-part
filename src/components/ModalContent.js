@@ -1,14 +1,17 @@
 import CarouselImg  from './CarouselImg';
+import Iframe from './Iframe'
 
 
-export default function ModalContent({ onClose }) {
-    return (
-      <div className="modal">
-      
-        <CarouselImg/>
-        <button onClick={onClose}>Close</button>
-         {/* <iframe title='myiframe' src="./data/151611.html" target='_bland'  width='100%'  height='80%'></iframe>
-       */}
-      </div>
-    );
+export default function ModalContent({ number }) {
+  console.log(window.location.pathname)
+
+  
+      if(window.location.pathname == '/search'){
+       return <CarouselImg number={number}/>
+      }else if(window.location.pathname == '/'){
+       return <Iframe number={number}/>
+      }
+    
+
+ 
   }

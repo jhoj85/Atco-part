@@ -1,8 +1,20 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import prueba1 from '../pdf/3-92554.pdf'
+import { usePartsDispatch } from "./Context"
 
-const CarouselImg = ()=>{
+const CarouselImg = (num)=>{
+
+
+    const dispatch= usePartsDispatch();
+
+
+    const handleClose = () =>{
+        dispatch({
+            type:'modalClose',
+            payload:{view:false}
+        })
+    }
 
     const createCarouselItemImage = (index, options = {}) => (
         <div key={index}>
@@ -20,7 +32,6 @@ const mainGroupId = 'Main';
         showArrows: ('showArrows', true, tooglesGroupId),
         showStatus: ('showStatus', true, tooglesGroupId),
         showIndicators: ('showIndicators', true, tooglesGroupId),
-      
         showThumbs: ('showThumbs', true, tooglesGroupId),
         useKeyboardArrows: ('useKeyboardArrows', true, tooglesGroupId),
         autoPlay: ('autoPlay', false, tooglesGroupId),
@@ -41,13 +52,12 @@ const mainGroupId = 'Main';
 
         window.open('../part/3-91155.html', '_blank')
 
-      
-       
     }
+
     return (
-        <>
+        <div className='modal'>
         <Carousel 
- 
+            useKeyboardArrows={true}
        /* {...getConfigurableProps()} */
         >{/* {baseChildren.props.children} */}
                 <div >
@@ -74,8 +84,8 @@ const mainGroupId = 'Main';
                         <p className="legend">Router</p></a>
                 </div>
             </Carousel>
-        
-        </>
+            <button onClick={handleClose}>Close</button>
+        </div>
     )
 }
 

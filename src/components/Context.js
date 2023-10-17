@@ -37,8 +37,25 @@ const PartsReducer = (state, action) =>{
                  [action.payload.key]: action.payload.value};
 
             case 'envio':
-                return {...state, view: action.payload}
-           
+                return {...state, 
+                    view: action.payload};
+
+            case 'modal':
+                return {
+                  ...state,
+                    view: true,
+                    };
+              
+            case 'modalClose':
+                return {
+                  ...state,
+                   view: false,
+                    };
+
+            case 'active':
+                return{...state, 
+                activo: true}
+
             default:
                 throw Error(`Unknown action type: ${action.type}`)
         }

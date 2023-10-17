@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {partsNumber} from '../data/datos'
 import {useParts, usePartsDispatch} from './Context'
 import {createPortal} from 'react-dom'
@@ -6,50 +6,52 @@ import ModalContent from './ModalContent'
 
 
 const PartsLists = ()=>{
-  const[showModal, setShowModal]= useState(false)
-
-    const tasks = useParts()
-    const parts = partsNumber
-   
-
-
-const busqueda = parts.filter(p =>{
-
-  /* if(p.material){
-    return(p.material.toString().includes(tasks.material))
-  }else if(p.material&& p.bend){
-    return(p.material.toString().includes(tasks.material)&& p.bend.toString().includes(tasks.bend))
-
-  } */
- 
-/*  return(p.number.toString().includes(tasks.number)) */
-  
-  return (p.material.toString().includes(tasks.material) && p.bend.toString().includes(9))
+  const[showModal, setShowModal]= useState(false);
+  const [number, setNumber]=useState({});
+  const tasks = useParts()
+  const dispatch = usePartsDispatch()
 
 
-})
+ useEffect(() => {
+  setShowModal(tasks.view);
+}, [tasks.view]);
+
+const handleImg = (num) => {
+  dispatch({
+    type: 'modal',
+    payload: { view: true },
+  });
+  setNumber(num);
+};
 
 
+const searchParts = partsNumber.filter(p => {
+  return (!tasks.material || p.material.includes(tasks.material)) &&
+         (!tasks.tube || p.tube.toString().includes(tasks.tube)) &&
+         (!tasks.bend || p.bend.toString().includes(tasks.bend)) &&
+         (!tasks.ferrule || p.ferrule.toString().includes(tasks.ferrule)) &&
+         (!tasks.nut || p.nut.toString().includes(tasks.nut));
+        
+});
 
-const handleImg = (e,number)=>{
-  setShowModal(true)
-  console.log(e, number)
-}
+console.log(searchParts)
 
-//console.log(busqueda)
 
   return (
     <>
-    <section>
-      {busqueda.map(p =>  (
-      <article  key={p.number} onClick={(e)=> handleImg(e, p.number)}>
-        <header>{p.number}</header>
-        <img alt={p.number} src={require(`../images/${p.image}`)}/>
-      </article>))}
-    </section> 
+      {
+        tasks.activo ? <section>
+        {searchParts.map(p =>  (
+        <article  key={p.number} onClick={()=> handleImg(p.number)}>
+          <header>{p.number}</header>
+          <img alt={p.number} src={require(`../images/${p.image}`)}/>
+        </article>))}
+      </section>   :  null
+      }
+      
    
       {showModal && createPortal(
-        <ModalContent onClose={() => setShowModal(false)} />,
+        <ModalContent number={number} onClose={() => setShowModal(false)} />,
         document.body
       )}
     
@@ -58,17 +60,3 @@ const handleImg = (e,number)=>{
 }
 export default PartsLists;
 
-
-
-/* function Task({ task }) {
-    const dispatch = usePartsDispatch();
-    
-    return(
-  <>
-      <section>
-        <p>{task.number}</p>
-      </section>
-  </>
-    );
-    
-  } */

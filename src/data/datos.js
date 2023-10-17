@@ -26,7 +26,7 @@
          {
           "number": "151495",
           "material": "alum",
-          "tube": 2,
+          "tube": 1,
           "ferrule": 1,
           "bend": 5,
           "nut": 303,

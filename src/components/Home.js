@@ -1,11 +1,12 @@
-import Search from './Search'
+import InputSearch from './InputSearch';
+import Lists from './Lists';
 
 const Home =()=>{
   
-
     return (
         <>
-      <Search/>
+        <InputSearch/>
+        <Lists/>
         </>
     )
 }

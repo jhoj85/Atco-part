@@ -50,6 +50,44 @@ nav ul li a:not(.active):hover {
     background-color: #5a5a63;
 }
 
+nav .menu{
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction:column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+nav .menu span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.2rem;
+    
+}
+
+@media (max-width: 480px){
+    nav .menu {
+        display: flex;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    nav ul {
+        /* display: none; */
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+}
+
 .container-input{
     display:flex;
     justify-content:flex-start;
@@ -108,14 +146,34 @@ header{
     border: 2px solid rgb(240, 240, 240);
     border-radius: 12px;
     position:fixed;
-     height: 80%;
+    height: 90%;
     width: 30%;
     top: 70px;
-   
-    left: calc(50% - 100px);
+    left: calc(65% - 100px);
     bottom: 70px;
-    text-align: right;
+    text-align: center;
   }
+
+
+.modal-iframe{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+    background-color: white;
+    border: 2px solid rgb(240, 240, 240);
+    border-radius: 12px;
+    position:fixed;
+    height: 100%;
+    width: 70%;
+    top: 20px;
+    left: calc(25% - 100px);
+    bottom: 70px;
+    text-align: center;
+
+}
 
 .select-part{
     font-size: medium;
@@ -143,6 +201,10 @@ header{
     height: 68%;
 }
 
+.control-arrow{
+border-radius: 10px;
+}
+
 
 .image-slider{
     height: 90%;
@@ -152,7 +214,6 @@ header{
    display: flex;
    justify-content: space-between;
    align-items: center;
-
    width: 90%;
    height: 30%;
 
@@ -162,8 +223,6 @@ header{
     
     height: 100%;
 }
-
-
 
 .container-img{
     height: 90%;
